@@ -25,7 +25,7 @@ public class Service {
     @Column(columnDefinition = "tinyint(1) default 1")
     private Boolean status;
 
-    private Date dated;
+    private String dated;
 
     private Long created_by;
 

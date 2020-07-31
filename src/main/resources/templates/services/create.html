@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layouts/master}">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking 1</title>
+</head>
+<body>
+<div layout:fragment="content" class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Create a New Service</h4>
+                        <p class="card-description">
+                            * implies mandatory
+                        </p>
+                        <form class="forms-sample" th:object="${service}" method="post" th:action="@{/services/store}">
+                            <div class="form-group">
+                                <label>Service Title *</label>
+                                <input type="text" class="form-control" th:field="*{title}" placeholder="Title">
+                            </div>
+                            <div class="form-group">
+                                <label>Service Description</label>
+                                <textarea class="form-control" th:field="*{description}" id="exampleTextarea1" rows="4"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>When *</label>
+                                <input type="text" class="form-control" th:field="*{dated}" placeholder="Title">
+                            </div>
+                            <div class="form-group">
+                                <label>Upper Deck *</label>
+                                <input type="number" class="form-control" th:field="*{upper_deck}" placeholder="Upper Deck">
+                            </div>
+                            <div class="form-group">
+                                <label>Lower Deck *</label>
+                                <input type="number" class="form-control" th:field="*{lower_deck}"  placeholder="Lower Deck">
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                            <button class="btn btn-light">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
