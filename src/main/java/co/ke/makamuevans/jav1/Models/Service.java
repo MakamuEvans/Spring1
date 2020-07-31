@@ -3,9 +3,14 @@ package co.ke.makamuevans.jav1.Models;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -25,7 +30,9 @@ public class Service {
     @Column(columnDefinition = "tinyint(1) default 1")
     private Boolean status;
 
-    private String dated;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @Column(columnDefinition = "DATETIME(0)")
+    private Date dated;
 
     private Long created_by;
 
@@ -40,4 +47,10 @@ public class Service {
 
     @UpdateTimestamp
     private Date updated_at;
+
+    public String getFormattedStatus(){
+        if (this.getStatus() == true)
+            return "active";
+        return "inactive";
+    }
 }

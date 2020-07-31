@@ -1,17 +1,25 @@
 package co.ke.makamuevans.jav1.Controllers;
 
 import co.ke.makamuevans.jav1.Models.Service;
+import co.ke.makamuevans.jav1.Repositories.ServiceRepository;
 import co.ke.makamuevans.jav1.Services.ServiceService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("services")
 public class ServicesController {
 
-    public final ServiceService serviceService;
+    private final ServiceService serviceService;
+    Logger logger = LoggerFactory.getLogger(ServicesController.class);
 
     @Autowired
     public ServicesController(ServiceService serviceService) {
@@ -19,8 +27,11 @@ public class ServicesController {
     }
 
 
-    @GetMapping(value = {"/index"}, name = "services.index")
-    public String index(){
+    @GetMapping({"/index", ""})
+    public String index(Model model){
+        Optional<Service> service = serviceService.findById(1L);
+        logger.error(service.get().getFormattedStatus());
+        model.addAttribute("services", serviceService.getAll());
         return "services/index";
     }
 
@@ -33,9 +44,7 @@ public class ServicesController {
 
     @PostMapping(value = {"store"})
     public String store(@ModelAttribute("service") Service service){
-        System.out.println("We here");
         serviceService.save(service);
-
         return "redirect:/services/create";
     }
 }
