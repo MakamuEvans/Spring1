@@ -49,7 +49,7 @@ public class Service {
     private Date updated_at;
 
     public String getFormattedStatus(){
-        if (this.getStatus() == true)
+        if (this.getStatus() != null && this.getStatus() == true)
             return "active";
         return "inactive";
     }

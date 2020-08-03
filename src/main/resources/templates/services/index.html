@@ -37,9 +37,8 @@
                                     <th>
                                         Attendees
                                     </th>
-                                    <th>
-                                        Createt At
-                                    </th>
+                                    <th>Createt At</th>
+                                    <th>Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -52,6 +51,11 @@
 
                                     </td>
                                     <td th:text="${service.created_at}"></td>
+                                    <td>
+                                        <a th:href="@{'/services/' + ${service.id}}">
+                                            view
+                                        </a>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
