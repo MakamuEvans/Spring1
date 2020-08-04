@@ -1,12 +1,17 @@
 package co.ke.makamuevans.jav1.Controllers;
 
+import co.ke.makamuevans.jav1.Models.QService;
 import co.ke.makamuevans.jav1.Models.Service;
 import co.ke.makamuevans.jav1.Repositories.ServiceRepository;
 import co.ke.makamuevans.jav1.Services.ServiceService;
+import co.ke.makamuevans.jav1.utilities.Constants;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -17,6 +22,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -33,8 +40,8 @@ public class ServicesController {
 
 
     @GetMapping({"/index", ""})
-    public String index(Model model) {
-        model.addAttribute("services", serviceService.findAllDesc());
+    public String index(Model model, @RequestParam Map<String,String> params) {
+        model.addAttribute("services", serviceService.findAll(params));
         return "services/index";
     }
 
