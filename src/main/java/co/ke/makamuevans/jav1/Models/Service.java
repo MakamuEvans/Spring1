@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -22,10 +23,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @Table(name = "services")
-public class Service {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Service extends BaseEntity{
 
     @Column(nullable = false)
     private String title;
@@ -40,6 +38,10 @@ public class Service {
     @Column(columnDefinition = "DATETIME(0)")
     private Date dated;
 
+    @OneToMany
+    @JoinColumn(name = "service_id", referencedColumnName = "id")
+    private List<Booking> bookings;
+
     private Long created_by;
 
     private BigInteger count;
@@ -48,11 +50,6 @@ public class Service {
 
     private BigInteger lower_deck;
 
-    @CreationTimestamp
-    private Date created_at;
-
-    @UpdateTimestamp
-    private Date updated_at;
 
     public String getFormattedStatus(){
         if (this.getStatus() != null && this.getStatus() == true)
