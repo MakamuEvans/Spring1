@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Book Service</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" th:href="@{/vendors/ti-icons/css/themify-icons.css}">
+    <link rel="stylesheet" th:href="@{/vendors/css/vendor.bundle.base.css}">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" th:href="@{/css/vertical-layout-light/style.css}">
+    <!-- endinject -->
+    <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
+</head>
+<body>
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-stretch auth auth-img-bg">
+            <div class="row flex-grow">
+                <div class="col-lg-6 d-flex align-items-center justify-content-center">
+                    <div class="auth-form-transparent text-left p-3">
+                        <div class="brand-logo">
+                            <img src="../../../../images/logo.svg" alt="logo">
+                        </div>
+                        <h4>Tandazaa Ministries</h4>
+                        <h6 class="font-weight-light">Book your seat</h6>
+                        <form class="pt-3" th:object="${booking}" th:action="@{/book-service}" method="post">
+                            <div class="form-group">
+                                <label>Select Service</label>
+                                <select class="form-control form-control-sm" required th:field="*{service_id}">
+                                    <option th:each="service : ${services}" th:value="${service.id}" th:text="${service.title}">Service</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Select No. of Attendees</label>
+                                <select onchange="countChange(this)" class="form-control form-control-sm" required>
+                                    <option selected disabled>Select No. of Attendeees</option>
+                                    <option value="1">1 Attendee</option>
+                                    <option value="2">2 Attendee</option>
+                                    <option value="3">3 Attendee</option>
+                                </select>
+                            </div>
+                            <div class="replica">
+
+                            </div>
+                            <div class="mt-3">
+                                <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6 register-half-bg d-flex flex-row">
+                    <p class="text-white font-weight-medium text-center flex-grow align-self-end">Copyright &copy; 2018  All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+        <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
+
+<div style="display: none">
+    <div class="row row-space elm">
+        <div class="col-6">
+            <div class="input-group">
+                <input class="form-control-sm form-control" type="text" placeholder="Names" required name="names[]" th:name="${booking.attendees[].}">
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="input-group">
+                <input class="form-control-sm form-control" type="text" placeholder="Phone No." required name="phone[]">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- container-scroller -->
+<!-- plugins:js -->
+<script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<script th:src="@{/vendors/chart.js/Chart.min.js}"></script>
+<!-- End plugin js for this page -->
+<!-- inject:js -->
+<script th:src="@{/js/off-canvas.js}"></script>
+<script th:src="@{/js/hoverable-collapse.js}"></script>
+<script th:src="@{/js/template.js}"></script>
+<script th:src="@{/js/settings.js}"></script>
+<script th:src="@{/js/todolist.js}"></script>
+<!-- endinject -->
+<!-- Custom js for this page-->
+<script th:src="@{/js/dashboard.js}"></script>
+<!-- End custom js for this page-->
+<script>
+    function countChange(count) {
+        var count_value = count.value;
+        const div = $('.elm').clone();
+        $('.replica').empty();
+        if (count_value == 1)
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+        else if (count_value == 2) {
+            $('.replica').append($('.elm').clone().removeClass("elm"));
+            $('.replica').append($('.elm').clone().removeClass("elm"));
+        } else if (count_value == 3) {
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+        } else if (count_value == 4) {
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+        } else if (count_value == 5) {
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+            $('.replica').append($('.elm').clone().removeClass("elm"))
+        }
+    }
+</script>
+</body>
+
+</html>

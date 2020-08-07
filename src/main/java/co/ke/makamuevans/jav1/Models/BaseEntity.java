@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -23,8 +25,8 @@ public class BaseEntity implements Serializable {
     private Long id;
 
     @CreationTimestamp
-    private Date created_at;
+    private LocalDateTime created_at;
 
     @UpdateTimestamp
-    private Date updated_at;
+    private LocalDateTime updated_at;
 }

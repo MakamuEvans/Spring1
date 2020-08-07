@@ -13,6 +13,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface ServiceRepository extends JpaRepository<Service, Long>, QuerydslPredicateExecutor {
-
-
+    public List<Service> findAllByStatus(Boolean status);
 }

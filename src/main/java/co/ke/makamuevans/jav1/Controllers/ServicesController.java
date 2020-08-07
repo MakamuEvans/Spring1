@@ -5,6 +5,7 @@ import co.ke.makamuevans.jav1.Models.Service;
 import co.ke.makamuevans.jav1.Repositories.ServiceRepository;
 import co.ke.makamuevans.jav1.Services.ServiceService;
 import co.ke.makamuevans.jav1.utilities.Constants;
+import co.ke.makamuevans.jav1.utilities.Helpers.Formatters.Formatter;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -23,6 +24,7 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.Optional;
 
@@ -33,7 +35,6 @@ public class ServicesController {
 
     private final ServiceService serviceService;
 
-    @Autowired
     public ServicesController(ServiceService serviceService) {
         this.serviceService = serviceService;
     }

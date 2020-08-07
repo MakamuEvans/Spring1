@@ -1,5 +1,6 @@
 package co.ke.makamuevans.jav1.Models;
 
+import co.ke.makamuevans.jav1.utilities.Helpers.Formatters.Formatter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,12 +32,12 @@ public class Service extends BaseEntity{
     @Column(columnDefinition = "TEXT default null")
     private String description;
 
-    @Column(columnDefinition = "tinyint(1) default 1")
+    @Column(columnDefinition = "tinyint(1) default 1 NOT NULL")
     private Boolean status;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @Column(columnDefinition = "DATETIME(0)")
-    private Date dated;
+    private LocalDateTime dated;
 
     @OneToMany
     @JoinColumn(name = "service_id", referencedColumnName = "id")
@@ -55,5 +56,13 @@ public class Service extends BaseEntity{
         if (this.getStatus() != null && this.getStatus() == true)
             return "active";
         return "inactive";
+    }
+
+    public String getDateCreated(){
+        return Formatter.formatdateTwo(this.getCreated_at());
+    }
+
+    public String appendDated(){
+        return Formatter.formatDateOne(this.getDated());
     }
 }

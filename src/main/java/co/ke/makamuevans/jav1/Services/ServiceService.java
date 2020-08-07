@@ -19,11 +19,18 @@ import java.util.Optional;
 @org.springframework.stereotype.Service
 public class ServiceService {
 
-    @Autowired
-    private ServiceRepository serviceRepository;
+    private final ServiceRepository serviceRepository;
+
+    public ServiceService(ServiceRepository serviceRepository) {
+        this.serviceRepository = serviceRepository;
+    }
 
     public Optional<Service> findById(Long id){
         return serviceRepository.findById(id);
+    }
+
+    public List<Service> findAllByStatus(Boolean status){
+        return serviceRepository.findAllByStatus(status);
     }
 
     public Page<Service> findAll(Map<String, String> params){

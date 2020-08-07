@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.annotation.Nullable;
 import javax.persistence.*;
 import java.math.BigInteger;
 
@@ -35,4 +36,12 @@ public class Booking extends BaseEntity{
 
     @Column(columnDefinition = "tinyint(1) default 0")
     private Boolean attended;
+
+    public Booking(Service service, String phone, String request_id, String names){
+        this.service = service;
+        this.phone = phone;
+        this.request_id = request_id;
+        this.names = names;
+        this.status = 0;
+    }
 }
