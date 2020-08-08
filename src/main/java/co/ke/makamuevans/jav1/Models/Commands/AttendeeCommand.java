@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class AttendeeAction {
+public class AttendeeCommand {
     private String phone;
     private String names;
 }

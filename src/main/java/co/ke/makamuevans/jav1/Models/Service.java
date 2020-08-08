@@ -5,17 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigInteger;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -33,7 +27,7 @@ public class Service extends BaseEntity{
     private String description;
 
     @Column(columnDefinition = "tinyint(1) default 1 NOT NULL")
-    private Boolean status;
+    private Boolean status = true;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @Column(columnDefinition = "DATETIME(0)")
@@ -47,8 +41,10 @@ public class Service extends BaseEntity{
 
     private BigInteger count;
 
+    @Column(columnDefinition = "int(10)")
     private BigInteger upper_deck;
 
+    @Column(columnDefinition = "int(10)")
     private BigInteger lower_deck;
 
 
@@ -59,7 +55,7 @@ public class Service extends BaseEntity{
     }
 
     public String getDateCreated(){
-        return Formatter.formatdateTwo(this.getCreated_at());
+        return Formatter.formatDateTwo(this.getCreated_at());
     }
 
     public String appendDated(){

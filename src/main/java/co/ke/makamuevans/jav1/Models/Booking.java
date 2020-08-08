@@ -1,9 +1,6 @@
 package co.ke.makamuevans.jav1.Models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.annotation.Nullable;
 import javax.persistence.*;
@@ -13,35 +10,33 @@ import java.math.BigInteger;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@RequiredArgsConstructor
 @Builder
 @Table(name = "bookings")
 public class Booking extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "service_id")
+    @NonNull
     private Service service;
 
     @Column(nullable = false)
+    @NonNull
     private String phone;
 
     @Column(nullable = false)
+    @NonNull
     private String request_id;
 
     @Column(nullable = false)
+    @NonNull
     private String names;
 
     private Integer seat;
 
-    private Integer status;
+    @Column(columnDefinition = "int(10) default 0 NOT NULL")
+    private Integer status = 0;
 
-    @Column(columnDefinition = "tinyint(1) default 0")
-    private Boolean attended;
-
-    public Booking(Service service, String phone, String request_id, String names){
-        this.service = service;
-        this.phone = phone;
-        this.request_id = request_id;
-        this.names = names;
-        this.status = 0;
-    }
+    @Column(columnDefinition = "tinyint(1) default 0 NOT NULL")
+    private Boolean attended = false;
 }

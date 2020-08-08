@@ -28,7 +28,7 @@
                             </div>
                             <div class="form-group">
                                 <label>When *</label>
-                                <input type="text" class="form-control" th:field="*{dated}" placeholder="Title">
+                                <input class="form-control" data-inputmask="'alias': 'datetime'" th:field="*{dated}" data-inputmask-inputformat="yyyy-mm-dd HH:MM" />
                             </div>
                             <div class="form-group">
                                 <label>Upper Deck *</label>
@@ -47,5 +47,9 @@
         </div>
     </div>
 </div>
+<th:block layout:fragment="scripts">
+    <script th:src="@{/vendors/inputmask/jquery.inputmask.bundle.js}"></script>
+    <script th:src="@{/js/inputmask.js}"></script>
+</th:block>
 </body>
 </html>

@@ -9,9 +9,7 @@
     $('.color-picker').asColorPicker();
   }
   if ($("#datepicker-popup").length) {
-    $('#datepicker-popup').datepicker({
-      enableOnReadonly: true,
-      todayHighlight: true,
+    $('#datepicker-popup').datetimepicker({
     });
   }
   if ($("#inline-datepicker").length) {

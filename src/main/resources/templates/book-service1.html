@@ -29,14 +29,22 @@
                             <img src="../../../../images/logo.svg" alt="logo">
                         </div>
                         <h4>Tandazaa Ministries</h4>
+                        <div th:if="${message}" th:text="${message}" class="alert alert-success"/>
                         <h6 class="font-weight-light">Book your seat</h6>
                         <form class="pt-3" th:object="${booking}" th:action="@{/book-service}" method="post">
+                            <div class="alert alert-warning" th:if="${#fields.hasErrors('*')}">
+                                <p><strong>Errors</strong></p>
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+                                </ul>
+                            </div>
                             <div class="form-group">
                                 <label>Select Service</label>
                                 <select class="form-control form-control-sm" required th:field="*{service_id}">
                                     <option th:selected="true" disabled value="">Select Service</option>
                                     <option th:each="service : ${services}" th:value="${service.id}" th:text="${service.title}">Service</option>
                                 </select>
+                                <p class="alert alert-danger" th:if="${#fields.hasErrors('service_id')}" th:errors="*{service_id}"></p>
                             </div>
                             <div class="form-group">
                                 <label>Select No. of Attendees</label>
