@@ -76,7 +76,30 @@
                                     </ul>
                                 </div>
                                 <div class="profile-feed">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th>Names</th>
+                                                <th>Phone</th>
+                                                <th>Status</th>
+                                                <th>Dated</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="attendee : ${service.getBookings()}">
+                                                <td th:text="${attendee.names}"></td>
+                                                <td th:text="${attendee.phone}"></td>
+                                                <td th:text="${attendee.status}"></td>
+                                                <td th:text="${attendee.getDateCreated()}"></td>
+                                                <td>
 
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>

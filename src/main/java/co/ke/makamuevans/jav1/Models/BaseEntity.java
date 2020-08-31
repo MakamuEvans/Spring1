@@ -1,5 +1,6 @@
 package co.ke.makamuevans.jav1.Models;
 
+import co.ke.makamuevans.jav1.utilities.Helpers.Formatters.Formatter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,4 +30,8 @@ public class BaseEntity implements Serializable {
 
     @UpdateTimestamp
     private LocalDateTime updated_at;
+
+    public String getDateCreated(){
+        return Formatter.formatDateTwo(this.getCreated_at());
+    }
 }

@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,6 +23,7 @@ import java.util.List;
 @Table(name = "services")
 public class Service extends BaseEntity{
 
+    @NotBlank(message = "Title cannot be blank!")
     @Column(nullable = false)
     private String title;
 
@@ -31,6 +35,7 @@ public class Service extends BaseEntity{
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @Column(columnDefinition = "DATETIME(0)")
+    @NotNull(message = "Service Date cannot be blank!")
     private LocalDateTime dated;
 
     @OneToMany
@@ -52,10 +57,6 @@ public class Service extends BaseEntity{
         if (this.getStatus() != null && this.getStatus() == true)
             return "active";
         return "inactive";
-    }
-
-    public String getDateCreated(){
-        return Formatter.formatDateTwo(this.getCreated_at());
     }
 
     public String appendDated(){
